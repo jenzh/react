@@ -24,13 +24,13 @@ function calculateWinner(squares) {
   //columns
   for (let i = 0; i < len; i++) {
     winner = squares[i]
-    lines[0] = i*len;
+    lines[0] = i;
     for (let j = 1; j < len; j ++) {
       if(!winner || squares[j*len+i] !== winner) {
         winner = null;
         break;
       }
-      lines[j] = j*len+i;
+      lines[j] = j*len + i;
     }
     if(winner) return {winner:winner,lines:lines};
   }
@@ -69,10 +69,9 @@ function finished(squares) {
 
 class Game extends Component {
 
-    size = 5
-
     constructor(props) {
       super(props);
+      this.size = 6   //container size
       this.state = {
         history: [{
           squares: Array(this.size*this.size).fill(null),
@@ -121,7 +120,8 @@ class Game extends Component {
       
       this.setState({
         stepNumber: step,
-        xIsNext: (step % 2) === 0
+        xIsNext: (step % 2) === 0,
+        lines: []
       });
   
     }
